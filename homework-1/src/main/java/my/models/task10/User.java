@@ -1,4 +1,4 @@
-package my.models;
+package my.models.task10;
 
 import java.io.Serializable;
 

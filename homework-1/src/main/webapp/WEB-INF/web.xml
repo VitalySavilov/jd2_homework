@@ -7,7 +7,7 @@
     <display-name>My Homework</display-name>
     <servlet>
         <servlet-name>First</servlet-name>
-        <servlet-class>my.servlets.FirstServlet</servlet-class>
+        <servlet-class>my.task8.FirstServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>First</servlet-name>
@@ -15,6 +15,6 @@
     </servlet-mapping>
     <error-page>
         <error-code>501</error-code>
-        <location>/jsp/error.jsp</location>
+        <location>/jsp/task10/error.jsp</location>
     </error-page>
 </web-app>

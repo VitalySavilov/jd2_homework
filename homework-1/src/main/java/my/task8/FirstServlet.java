@@ -1,4 +1,4 @@
-package my.servlets;
+package my.task8;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +19,7 @@ public class FirstServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         out.println("<html><head><title>First Servlet</title></head>");
         out.println("<body><h1>This is First Servlet</h1>");
-        out.println("<a href = \"/home/jsp/my_form.jsp\">form</a></br>");
+        out.println("<a href = \"/home/jsp/task10/my_form.jsp\">form</a></br>");
         out.println("<a href = \"/home/counter\">counter</a></br>");
         out.println("<a href = \"/home/br-info\">browser information</a>");
         out.println("</body></html>");

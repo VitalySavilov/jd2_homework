@@ -1,4 +1,4 @@
-package my.servlets;
+package my.task9_12;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletConfig;

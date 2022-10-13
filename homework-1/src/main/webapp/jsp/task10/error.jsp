@@ -3,6 +3,6 @@
 <html>
 <body>
 <h2>Ошибка заполнения формы</h2>
-<a href = "/home/jsp/my_form.jsp">Заполните форму еще раз</a>
+<a href = "/home/jsp/task10/my_form.jsp">Заполните форму еще раз</a>
 </body>
 </html>
