@@ -8,7 +8,7 @@ Task 4:
 
 java -cp ./service/target/homework-2-jar-with-dependencies.jar task_4.Main_4 "21.09.2022" "A-100" 50
 
-java -cp ./service/target/homework-2-jar-with-dependencies.jar task_4.Main_4 "25.09.2022" "Hypermarket \"KORONA\"" 75.30
+java -cp ./service/target/homework-2-jar-with-dependencies.jar task_4.Main_4 "25.09.2022" "KFC" 25.30
 
 Task 5:
 
