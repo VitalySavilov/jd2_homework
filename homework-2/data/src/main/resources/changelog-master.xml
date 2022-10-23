@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="savilov@gmail.com">
+        <sql>
+            create table if not exists vitaly_savilov.receivers (
+            num int AUTO_INCREMENT PRIMARY KEY,
+            name varchar (255) unique
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="2" author="savilov@gmail.com">
+        <sql>
+            create table if not exists vitaly_savilov.expenses (
+            num int AUTO_INCREMENT PRIMARY KEY,
+            paydate varchar (255),
+            receiver int,
+            value dec (10, 2),
+            FOREIGN KEY (receiver) REFERENCES vitaly_savilov.receivers(num)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="3" author="savilov@gmail.com">
+        <sql>
+            insert into vitaly_savilov.receivers (num, name) values (1, 'Internet-Provider \"SOLO\"');
+            insert into vitaly_savilov.receivers (num, name) values (2, 'Hypermarket \"KORONA\"');
+            insert into vitaly_savilov.receivers (num, name) values (3, 'MTS');
+        </sql>
+    </changeSet>
+
+    <changeSet id="4" author="savilov@gmail.com">
+        <sql>
+            insert into vitaly_savilov.expenses (num, paydate, receiver, value) values (1, '10.05.2022', 1, 20);
+            insert into vitaly_savilov.expenses (num, paydate, receiver, value) values (2, '10.05.2022', 2, 94.2);
+            insert into vitaly_savilov.expenses (num, paydate, receiver, value) values (3, '11.05.2022', 3, 10);
+            insert into vitaly_savilov.expenses (num, paydate, receiver, value) values (4, '11.05.2022', 2, 12.95);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
