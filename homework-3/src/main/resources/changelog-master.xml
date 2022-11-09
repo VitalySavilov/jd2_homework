@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `t_person` (
+            `ID` BIGINT(19) NOT NULL,
+            `AGE` INT,
+            `FIRSTNAME` VARCHAR(255) NULL,
+            `LASTNAME` VARCHAR(255) NULL,
+            PRIMARY KEY (`ID`));
+        </sql>
+    </changeSet>
+
+    <changeSet id="2" author="vitaly.savilov@gmail.com">
+        <sql>
+            INSERT INTO t_person (ID, AGE, FIRSTNAME, LASTNAME) values (1, 20, 'Ivan', 'Ivanov');
+            INSERT INTO t_person (ID, AGE, FIRSTNAME, LASTNAME) values (2, 25, 'Petr', 'Petrov');
+            INSERT INTO t_person (ID, AGE, FIRSTNAME, LASTNAME) values (3, 30, 'Stepan', 'Stepanov');
+        </sql>
+    </changeSet>
+
+    <changeSet id="3" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS t_person_seq (
+            next_val INT UNSIGNED PRIMARY KEY NOT NULL
+            );
+            INSERT INTO t_person_seq VALUES (4);
+        </sql>
+    </changeSet>
+
+    <changeSet id="4" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS t_person_update (
+            ID BIGINT(19) PRIMARY KEY AUTO_INCREMENT,
+            PERSON_ID BIGINT(19),
+            PREVIOUS_NAME VARCHAR(255),
+            NEW_NAME VARCHAR(255),
+            UPDATED_BY VARCHAR(255),
+            UPDATED_ON DATETIME
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="5" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TRIGGER log_updates
+            AFTER UPDATE
+            ON t_person
+            FOR EACH ROW
+            Insert into t_person_update(PERSON_ID, PREVIOUS_NAME, NEW_NAME, UPDATED_BY, UPDATED_ON)
+            VALUES (NEW.ID, OLD.FIRSTNAME, NEW.FIRSTNAME, (SELECT USER()), NOW()
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="6" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TRIGGER `before_update`
+            BEFORE UPDATE ON `t_person` FOR EACH ROW
+            SET NEW.FIRSTNAME = LOWER(NEW.FIRSTNAME);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
