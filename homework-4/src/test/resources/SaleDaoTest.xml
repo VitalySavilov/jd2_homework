@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataset>
+    <t_product ID="303" PRODUCT_NAME="Tea" />
+    <t_sale PRODUCT_ID="303" CLIENT_NAME="Alex" ORDER_PRICE="99.5" />
+</dataset>

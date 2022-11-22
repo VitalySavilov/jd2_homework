@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `t_manager` (
+            `ID` BIGINT(25),
+            `COMPANY` VARCHAR(255) NULL,
+            `PROJECT_NAME` VARCHAR(255) NULL,
+            PRIMARY KEY (`ID`));
+        </sql>
+    </changeSet>
+
+    <changeSet id="2" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `t_programmer` (
+            `ID` BIGINT(25),
+            `COMPANY` VARCHAR(255) NULL,
+            `LANGUAGE` VARCHAR(255) NULL,
+            PRIMARY KEY (`ID`));
+        </sql>
+    </changeSet>
+
+    <changeSet id="3" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS t_user_seq (
+            next_val INT UNSIGNED PRIMARY KEY NOT NULL);
+            INSERT INTO t_user_seq VALUES (1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="4" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `t_person` (
+            `ID` BIGINT(25) AUTO_INCREMENT,
+            `PERSON_TYPE` VARCHAR(1) NULL,
+            `NAME` VARCHAR(255) NULL,
+            `SURNAME` VARCHAR(255) NULL,
+            `FACULTY` VARCHAR(255) NULL,
+            `MARK` DOUBLE,
+            `COMPANY` VARCHAR(255) NULL,
+            `SALARY` DOUBLE,
+            PRIMARY KEY (`ID`));
+        </sql>
+    </changeSet>
+
+    <changeSet id="5" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `t_product` (
+            `ID` BIGINT(25) AUTO_INCREMENT,
+            `PRODUCT_NAME` VARCHAR(255) NULL,
+            PRIMARY KEY (`ID`));
+        </sql>
+    </changeSet>
+
+    <changeSet id="6" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `t_provider` (
+            `PRODUCT_ID` BIGINT(25),
+            `PROVIDER_NAME` VARCHAR(255) NULL,
+            `PRICE` DOUBLE,
+            PRIMARY KEY (`PRODUCT_ID`),
+            FOREIGN KEY (`PRODUCT_ID`) REFERENCES `t_product` (`ID`));
+        </sql>
+    </changeSet>
+
+    <changeSet id="7" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `t_sale` (
+            `PRODUCT_ID` BIGINT(25),
+            `CLIENT_NAME` VARCHAR(255) NULL,
+            `ORDER_PRICE` DOUBLE,
+            PRIMARY KEY (`PRODUCT_ID`),
+            FOREIGN KEY (`PRODUCT_ID`) REFERENCES `t_product` (`ID`));
+        </sql>
+    </changeSet>
+
+    <changeSet id="8" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `t_client` (
+            `ID` BIGINT(25),
+            `NAME` VARCHAR(255) NULL,
+            `SURNAME` VARCHAR(255) NULL,
+            PRIMARY KEY (`ID`));
+        </sql>
+    </changeSet>
+
+    <changeSet id="9" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `t_course` (
+            `ID` BIGINT(25) AUTO_INCREMENT,
+            `COURSE_NAME` VARCHAR(255) NULL,
+            `PRICE` DOUBLE,
+            PRIMARY KEY (`ID`));
+        </sql>
+    </changeSet>
+
+    <changeSet id="10" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `t_payment` (
+            `ID` BIGINT(25),
+            `DATE` VARCHAR(255) NULL,
+            `CLIENT_NAME` VARCHAR(255) NULL,
+            PRIMARY KEY (`ID`));
+        </sql>
+    </changeSet>
+
+    <changeSet id="11" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS t_client_seq (
+            next_val INT UNSIGNED PRIMARY KEY NOT NULL );
+            INSERT INTO t_client_seq VALUES (1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="12" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS id_table (
+            table_name VARCHAR(32),
+            pk_value BIGINT NOT NULL);
+        </sql>
+    </changeSet>
+
+    <changeSet id="13" author="vitaly.savilov@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `t_order` (
+            `ID` BIGINT(25) AUTO_INCREMENT,
+            `SUM` DOUBLE,
+            `CLIENT_NAME` VARCHAR(255) NULL,
+            `CLIENT_TEL_NUMBER` VARCHAR(255) NULL,
+            `CITY` VARCHAR(255) NULL,
+            `STREET` VARCHAR(255) NULL,
+            `HOUSE_NUMBER` VARCHAR(255) NULL,
+            PRIMARY KEY (`ID`));
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
