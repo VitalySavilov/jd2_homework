@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataset>
+
+    <t_user ID="101" USER_NAME="Ivan" USER_MALE="Petrov" ROLE="ADMIN"/>
+    <t_user ID="102" USER_NAME="Evgeny" USER_MALE="Sidorov" ROLE="USER"/>
+
+    <t_payment_card ID="201" USER_ID="101" CARD_TYPE="MASTERCARD" CARD_NUM="123456789"/>
+    <t_payment_card ID="202" USER_ID="102" CARD_TYPE="VISA" CARD_NUM="987654321"/>
+    <t_payment_card ID="203" USER_ID="102" CARD_TYPE="MAESTRO" CARD_NUM="543434543"/>
+
+</dataset>

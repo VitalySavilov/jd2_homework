@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <tx:annotation-driven/>
+
+    <tx:advice id="txAdvice">
+        <tx:attributes>
+            <tx:method name="change*" propagation="REQUIRED" isolation="DEFAULT"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* it.academy.service.ChangeRoleService.*(..))"/>
+    </aop:config>
+
+    <context:property-placeholder location="classpath:hibernate.properties, classpath:jdbc.properties"/>
+
+    <context:component-scan base-package="it.academy"/>
+
+
+    <bean name="sessionFactoryBean" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="hibernateProperties" ref="hibernateProperties"/>
+        <property name="annotatedClasses">
+            <array>
+                <value>it.academy.model.User</value>
+                <value>it.academy.model.PaymentCard</value>
+            </array>
+        </property>
+    </bean>
+
+    <bean name="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="url" value="${url}"/>
+        <property name="driverClassName" value="${driver}"/>
+        <property name="username" value="${user}"/>
+        <property name="password" value="${password}"/>
+        <property name="removeAbandonedOnBorrow" value="true"/>
+        <property name="initialSize" value="10"/>
+        <property name="maxTotal" value="50"/>
+    </bean>
+
+    <bean name="hibernateProperties" class="java.util.Properties">
+        <constructor-arg type="java.util.Properties">
+            <map>
+                <entry key="debug" value="true"/>
+                <entry key="hibernate.dialect" value="${dialect}"/>
+                <entry key="hibernate.show_sql" value="${hibernate.show_sql}"/>
+                <entry key="hibernate.format_sql" value="${hibernate.format_sql}"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <bean name="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <constructor-arg ref="sessionFactoryBean"/>
+    </bean>
+
+</beans>
+

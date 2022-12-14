@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <bean name="client" class="it.academy.task_9.Client">
+        <constructor-arg name="name" value="Denis"/>
+        <constructor-arg name="surname" value="Denisov"/>
+    </bean>
+
+    <bean name="homeAddress" class="it.academy.task_9.HomeAddress">
+        <constructor-arg name="street" value="Pushkina"/>
+        <constructor-arg name="homeNumber" value="12"/>
+        <constructor-arg name="phoneNumbers">
+            <list>
+                <value>+375 29 654-32-17</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean name="workAddress" class="it.academy.task_9.WorkAddress">
+        <constructor-arg name="street" value="Esenina"/>
+        <constructor-arg name="homeNumber" value="55"/>
+        <constructor-arg name="phoneNumbers">
+            <list>
+                <value>+375 17 896-54-11</value>
+                <value>+375 44 547-66-77</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+</beans>
+
