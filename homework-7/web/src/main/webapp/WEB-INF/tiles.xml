@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+ 
+<tiles-definitions>  
+
+   <definition name="template-def"
+       template="/WEB-INF/layouts/default.jsp">
+       <put-attribute name="title" value="" />  
+       <put-attribute name="header" value="/WEB-INF/templates/header.jsp" />
+       <put-attribute name="menu" value="/WEB-INF/templates/menu.jsp" />
+       <put-attribute name="body" value="" />  
+       <put-attribute name="footer" value="/WEB-INF/templates/footer.jsp" />
+   </definition>  
+
+   <definition name="home" extends="template-def">  
+       <put-attribute name="title" value="Welcome" />  
+       <put-attribute name="body" value="/WEB-INF/pages/home.jsp" />
+   </definition>
+
+    <definition name="add_car" extends="template-def">
+        <put-attribute name="title" value="Add" />
+        <put-attribute name="body" value="/WEB-INF/pages/add_car.jsp" />
+    </definition>
+
+    <definition name="car_list" extends="template-def">
+        <put-attribute name="title" value="CarList" />
+        <put-attribute name="body" value="/WEB-INF/pages/car_list.jsp" />
+    </definition>
+
+</tiles-definitions>

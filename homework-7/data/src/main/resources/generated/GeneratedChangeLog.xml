@@ -1,0 +1,71 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.10.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd">
+    <changeSet author="Kenny (generated)" id="1671385984075-1">
+        <createTable tableName="t_car">
+            <column autoIncrement="true" name="C_ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="C_PRICE" type="BIGINT"/>
+            <column name="C_TYPE" type="VARCHAR(255)"/>
+            <column name="M_ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Kenny (generated)" id="1671385984075-2">
+        <createTable tableName="t_car_image">
+            <column autoIncrement="true" name="I_ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="I_IMAGE" type="MEDIUMBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Kenny (generated)" id="1671385984075-3">
+        <createTable tableName="t_car_model">
+            <column autoIncrement="true" name="M_ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="M_MARK" type="VARCHAR(255)"/>
+            <column name="M_COLOR" type="VARCHAR(255)"/>
+            <column name="M_DATE" type="date"/>
+            <column name="I_ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Kenny (generated)" id="1671385984075-4">
+        <loadData commentLineStartsWith="#" encoding="UTF-8" file="generated/data/t_car.csv" quotchar="&quot;" separator="," tableName="t_car">
+            <column header="C_ID" name="C_ID" type="NUMERIC"/>
+            <column header="C_PRICE" name="C_PRICE" type="NUMERIC"/>
+            <column header="C_TYPE" name="C_TYPE" type="STRING"/>
+            <column header="M_ID" name="M_ID" type="NUMERIC"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="Kenny (generated)" id="1671385984075-5">
+        <loadData commentLineStartsWith="#" encoding="UTF-8" file="generated/data/t_car_image.csv" quotchar="&quot;" separator="," tableName="t_car_image">
+            <column header="I_ID" name="I_ID" type="NUMERIC"/>
+            <column header="I_IMAGE" name="I_IMAGE" type="BLOB"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="Kenny (generated)" id="1671385984075-6">
+        <loadData commentLineStartsWith="#" encoding="UTF-8" file="generated/data/t_car_model.csv" quotchar="&quot;" separator="," tableName="t_car_model">
+            <column header="M_ID" name="M_ID" type="NUMERIC"/>
+            <column header="M_MARK" name="M_MARK" type="STRING"/>
+            <column header="M_COLOR" name="M_COLOR" type="STRING"/>
+            <column header="M_DATE" name="M_DATE" type="DATE"/>
+            <column header="I_ID" name="I_ID" type="NUMERIC"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="Kenny (generated)" id="1671385984075-7">
+        <createIndex indexName="FK_T_CAR_MODEL_ON_I" tableName="t_car_model">
+            <column name="I_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Kenny (generated)" id="1671385984075-8">
+        <createIndex indexName="FK_T_CAR_ON_M" tableName="t_car">
+            <column name="M_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Kenny (generated)" id="1671385984075-9">
+        <addForeignKeyConstraint baseColumnNames="I_ID" baseTableName="t_car_model" constraintName="FK_T_CAR_MODEL_ON_I" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="I_ID" referencedTableName="t_car_image" validate="true"/>
+    </changeSet>
+    <changeSet author="Kenny (generated)" id="1671385984075-10">
+        <addForeignKeyConstraint baseColumnNames="M_ID" baseTableName="t_car" constraintName="FK_T_CAR_ON_M" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="M_ID" referencedTableName="t_car_model" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
